@@ -7,10 +7,10 @@ resources:
   # Vault External Secrets
   - vault/app-user-secret.yaml
   - vault/superuser-secret.yaml
-  - vault/backup-s3-secret.yaml
+  # - vault/backup-s3-secret.yaml  # Disabled - using Velero instead
 
   # CNPG Cluster
   - manifests/cluster.yaml
 
-  # Scheduled Backup
-  - manifests/scheduled-backup.yaml
+  # Scheduled Backup - Disabled, using Velero instead
+  # - manifests/scheduled-backup.yaml

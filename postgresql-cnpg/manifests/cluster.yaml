@@ -52,24 +52,7 @@ spec:
   monitoring:
     enablePodMonitor: true
 
-  # Backup configuration (using Longhorn snapshots)
-  backup:
-    barmanObjectStore:
-      destinationPath: s3://cnpg-backups/
-      endpointURL: http://minio.minio.svc.cluster.local:9000
-      s3Credentials:
-        accessKeyId:
-          name: postgresql-cnpg-backup-s3
-          key: ACCESS_KEY_ID
-        secretAccessKey:
-          name: postgresql-cnpg-backup-s3
-          key: ACCESS_SECRET_KEY
-      wal:
-        compression: gzip
-      data:
-        compression: gzip
-        immediateCheckpoint: true
-    retentionPolicy: "30d"
+  # Backup disabled - using Velero for backups instead
 
   # Affinity to spread replicas across nodes
   affinity:
