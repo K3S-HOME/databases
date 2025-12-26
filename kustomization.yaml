@@ -14,6 +14,7 @@ resources:
   - postgresql/argocd/postgres-exporter-read-0.yaml
   - postgresql/argocd/postgres-exporter-read-1.yaml
   - postgresql-dev/argocd/postgresql-dev.yaml
+  - postgresql-cnpg/argocd/postgresql-cnpg.yaml
 
   # Object storage
   - minio/argocd/minio.yaml

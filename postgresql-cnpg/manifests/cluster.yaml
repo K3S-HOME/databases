@@ -1,0 +1,83 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgresql-cnpg
+  namespace: postgresql-cnpg
+spec:
+  # PostgreSQL version
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.6
+
+  # Number of instances
+  instances: 3
+
+  # Storage configuration - using Longhorn
+  storage:
+    storageClass: longhorn
+    size: 20Gi
+
+  # Resource requests and limits
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "500m"
+    limits:
+      memory: "2Gi"
+      # cpu: no limit to prevent throttling
+
+  # PostgreSQL configuration
+  postgresql:
+    parameters:
+      max_connections: "200"
+      shared_buffers: "512MB"
+      effective_cache_size: "1536MB"
+      maintenance_work_mem: "128MB"
+      checkpoint_completion_target: "0.9"
+      wal_buffers: "16MB"
+      default_statistics_target: "100"
+      random_page_cost: "1.1"
+      effective_io_concurrency: "200"
+      work_mem: "2621kB"
+      min_wal_size: "1GB"
+      max_wal_size: "4GB"
+
+  # Bootstrap configuration
+  bootstrap:
+    initdb:
+      database: app
+      owner: app
+      secret:
+        name: postgresql-cnpg-app-user
+
+  # Monitoring
+  monitoring:
+    enablePodMonitor: true
+
+  # Backup configuration (using Longhorn snapshots)
+  backup:
+    barmanObjectStore:
+      destinationPath: s3://cnpg-backups/
+      endpointURL: http://minio.minio.svc.cluster.local:9000
+      s3Credentials:
+        accessKeyId:
+          name: postgresql-cnpg-backup-s3
+          key: ACCESS_KEY_ID
+        secretAccessKey:
+          name: postgresql-cnpg-backup-s3
+          key: ACCESS_SECRET_KEY
+      wal:
+        compression: gzip
+      data:
+        compression: gzip
+        immediateCheckpoint: true
+    retentionPolicy: "30d"
+
+  # Affinity to spread replicas across nodes
+  affinity:
+    podAntiAffinityType: required
+    nodeSelector: {}
+    tolerations: []
+
+  # Enable superuser access
+  enableSuperuserAccess: true
+  superuserSecret:
+    name: postgresql-cnpg-superuser
