@@ -74,8 +74,6 @@ spec:
   # Affinity to spread replicas across nodes
   affinity:
     podAntiAffinityType: required
-    nodeSelector: {}
-    tolerations: []
 
   # Enable superuser access
   enableSuperuserAccess: true
