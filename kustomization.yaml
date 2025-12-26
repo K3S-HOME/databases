@@ -5,6 +5,9 @@ resources:
   # App of Apps Application
   - application.yaml
 
+  # Longhorn distributed block storage
+  - longhorn/argocd/longhorn.yaml
+
   # PostgreSQL databases
   - postgresql/argocd/postgresql.yaml
   - postgresql/argocd/postgres-exporter.yaml
