@@ -13,7 +13,7 @@ resources:
   - manifests/cluster.yaml
 
   # PodMonitor for Prometheus metrics collection
-  - ../cnpg/podmonitor.yaml
+  - manifests/podmonitor.yaml
 
   # Scheduled Backup - Disabled, using Velero instead
   # - manifests/scheduled-backup.yaml
