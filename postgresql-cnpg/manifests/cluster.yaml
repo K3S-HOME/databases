@@ -51,6 +51,9 @@ spec:
   # Monitoring
   monitoring:
     enablePodMonitor: true
+    podMonitorMetadata:
+      labels:
+        release: prometheus
 
   # Backup disabled - using Velero for backups instead
 
