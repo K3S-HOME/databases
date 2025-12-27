@@ -1,0 +1,11 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: vault
+  namespace: postgresql-cnpg
+spec:
+  cluster:
+    name: postgresql-cnpg
+  name: vault
+  owner: vault
+  ensure: present
