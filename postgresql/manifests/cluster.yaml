@@ -1,8 +1,8 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: postgresql-cnpg
-  namespace: postgresql-cnpg
+  name: postgresql
+  namespace: postgresql
 spec:
   # PostgreSQL version
   imageName: ghcr.io/cloudnative-pg/postgresql:16.6
@@ -46,7 +46,7 @@ spec:
       database: app
       owner: app
       secret:
-        name: postgresql-cnpg-app-user
+        name: postgresql-app-user
 
   # Monitoring
   monitoring:
@@ -72,4 +72,4 @@ spec:
   # Enable superuser access
   enableSuperuserAccess: true
   superuserSecret:
-    name: postgresql-cnpg-superuser
+    name: postgresql-superuser

@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: postgresql-cnpg
+  name: postgresql
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -11,11 +11,11 @@ spec:
   source:
     repoURL: https://github.com/Mayne0213/databases.git
     targetRevision: main
-    path: postgresql-cnpg
+    path: postgresql
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: postgresql-cnpg
+    namespace: postgresql
 
   syncPolicy:
     automated:
