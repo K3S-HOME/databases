@@ -6,9 +6,6 @@ resources:
   - application.yaml
 
   # 각 앱의 ArgoCD Application 중앙 관리
-  # Longhorn distributed block storage
-  - longhorn/argocd.yaml
-
   # PostgreSQL databases
   - postgresql-dev/argocd.yaml
   - postgresql/argocd/postgresql.yaml
