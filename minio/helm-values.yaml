@@ -53,6 +53,18 @@ environment:
   MINIO_API_CORS_ALLOW_ORIGIN: "*"
   MINIO_BROWSER_REDIRECT_URL: "https://minio.minio0213.kro.kr"
   MINIO_PROMETHEUS_AUTH_TYPE: "public"
+  # OIDC configuration for Authelia SSO
+  MINIO_IDENTITY_OPENID_CONFIG_URL: "https://auth0213.kro.kr/.well-known/openid-configuration"
+  MINIO_IDENTITY_OPENID_CLIENT_ID: "minio"
+  MINIO_IDENTITY_OPENID_SCOPES: "openid,profile,email"
+  MINIO_IDENTITY_OPENID_REDIRECT_URI: "https://minio.minio0213.kro.kr/oauth_callback"
+  MINIO_IDENTITY_OPENID_CLAIM_NAME: "groups"
+
+# Extra secret for OIDC client secret
+extraSecretEnvironmentVars:
+  - envName: MINIO_IDENTITY_OPENID_CLIENT_SECRET
+    secretRef: minio-oidc-secret
+    secretKey: MINIO_IDENTITY_OPENID_CLIENT_SECRET
 
 # Ingress disabled (managed separately)
 ingress:
